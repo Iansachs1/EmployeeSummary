@@ -1,4 +1,52 @@
-# EmployeeSummary
+# Work Team Members Summary Page Generator
+
+  ## Description
+  
+This is a CLI app that prompts the user to fill out employee information for each manager, engineer, and intern in their team and writes that information into an html document that clearly displays every team members info. each different type of employee has different prompts and displays different information relevant to their specific role.
+  
+## Table of Contents
+  
+[1. Description](##-Description)
+  
+[2. Installation](##-Installation)
+  
+[3. Usage](##-Usage)
+  
+[4. License](##-License)
+  
+[5. Contributing](##-Contributing)
+  
+[6. Tests](##-Tests)
+  
+[7. Questions](##-Questions)
+  
+## Installation
+  
+clone the repository onto your your computer, in terminal navigate to the develop folder of the repository, run "npm i" to install required node dependancies.
+  
+## Usage
+  
+This application is used to organize and display all the employees on a team's information in a webpage. to use it navigate to the develop folder in the repository after following the installation guidelines and run "node app.js" then fill out the prompts. the finished html file ready for deployment will be written to the output folder in the repository.
+  
+## Licenses
+  
+No licenses at this time
+  
+## Contributing
+  
+reach out to me using the contact info below to see how to contribute
+  
+## Tests
+  
+I used jest tests to confirm that the parent class Employee, and all of its subclasses (Manager, Engineer, and Intern) took in the required arguments and outputted a proper object.
+  
+## Questions
+
+If you have any questions, please reach out to me through email or via github:
+
+iansachs1@gmail.com
+
+https://github.com/iansachs1
 
 ### PseudoCode ###
 
