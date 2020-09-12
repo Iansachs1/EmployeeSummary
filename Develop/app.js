@@ -12,7 +12,9 @@ const render = require("./lib/htmlRenderer");
 
 const employees = [];
 
-
+// prompts user in node to fill out the arguments used to create a new manager then...
+// pushes the new manager object to our array of all employees then...
+// calls confirm new employee function 
 function createManager() {
     inquirer
         .prompt([
@@ -38,18 +40,25 @@ function createManager() {
         ])
 
         .then(function (response) {
+            // converts responses to variables
             const name = response.name;
             const id = response.id;
             const email = response.email;
             const officeNumber = response.officeNumber;
 
+            // creates a new manager object using our manager subclass of the employees class
             const teamManager = new Manager(name, id, email, officeNumber);
 
+            // pushes the new manager to our array of employees
             employees.push(teamManager);
+
             confirmNewEmployee();
         })
 }
 
+// prompts user in node to fill out the arguments used to create a new engineer then...
+// pushes the new engineer object to our array of all employees then...
+// calls confirm new employee function 
 function createEngineer() {
     inquirer
         .prompt([
@@ -75,17 +84,25 @@ function createEngineer() {
         ])
 
         .then(function (response) {
+            // converts responses to variables
             const name = response.name;
             const id = response.id;
             const email = response.email;
             const github = response.github;
 
+            // creates a new engineer object using our engineer subclass of the employees class
             const newEngineer = new Engineer(name, id, email, github);
+
+            // pushes the new engineer to our array of employees
             employees.push(newEngineer);
+
             confirmNewEmployee();
         })
 }
 
+// prompts user in node to fill out the arguments used to create a new intern then...
+// pushes the new intern object to our array of all employees then...
+// calls confirm new employee function 
 function createIntern() {
     inquirer
         .prompt([
@@ -111,21 +128,27 @@ function createIntern() {
         ])
 
         .then(function (response) {
+            // converts responses to variables
             const name = response.name;
             const id = response.id;
             const email = response.email;
             const github = response.school;
 
+            // creates a new intern object using our intern subclass of the employees class
             const newIntern = new Intern(name, id, email, github);
+
+            // pushes the new intern to our array of employees
             employees.push(newIntern);
+
             confirmNewEmployee();
         })
 }
 
-
+// prompts the user in node with a list of employee types to create then...
+// calls the correct createEmployee function based on the user's response
 function getEmployeeType() {
     const employeeTypes = ["Engineer", "Intern"]
-    
+
     inquirer
         .prompt([
             {
@@ -135,36 +158,43 @@ function getEmployeeType() {
                 choices: employeeTypes
             }
         ])
-        .then(function(response) {
+        .then(function (response) {
+            // if the response from the prompt is engineer, call create engineer function
             if (response.employeeType === "Engineer") {
                 createEngineer();
+
+                // if the response from the prompt is engineer, call create intern function
             } else if (response.employeeType === "Intern") {
                 createIntern();
             }
         })
-    }
-    
-    function confirmNewEmployee() {
-        inquirer
-            .prompt([
-                {
-                    type: "confirm",
-                    name: "confirmAddEmployee",
-                    message: "Do you want to add a new employee?"
-                }
-            ])
-            .then(function (response) {
-                if (response.confirmAddEmployee) {
-                    getEmployeeType();
-                } else {
-                    // call create team
-                    
-                    fs.writeFileSync(outputPath, render(employees));
-                }
-            });
-    }
-    // Write code to use inquirer to gather information about the development team members,
-    // and to create objects for each team member (using the correct classes as blueprints!)
+}
+
+
+// prompts the user to confirm whether they want to add another employee to their team then...
+// if they do want to add another employee, calls the getEmployeeType function or...
+// if they dont want to add another employee, takes the list of employees created and writes an html file into the output folder whose content is the list of employees created by iquirer prompts passed into their respective html templates and gathered into one main html file
+function confirmNewEmployee() {
+    inquirer
+        .prompt([
+            {
+                type: "confirm",
+                name: "confirmAddEmployee",
+                message: "Do you want to add a new employee?"
+            }
+        ])
+        .then(function (response) {
+            if (response.confirmAddEmployee) {
+                getEmployeeType();
+            } else {
+                // call create team
+
+                fs.writeFileSync(outputPath, render(employees));
+            }
+        });
+}
+// Write code to use inquirer to gather information about the development team members,
+// and to create objects for each team member (using the correct classes as blueprints!)
 createManager();
 
 

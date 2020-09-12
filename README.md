@@ -2,7 +2,7 @@
 
 ### PseudoCode ###
 
-classes and subclassses built
+classes and subclassses built according to the tests
 
 const employees = []
 
@@ -24,6 +24,7 @@ Manager
 
     new manager (response1, response2, response3, response 4)
     employees.push(new manager)
+    confirmAddEmployee()
     
 
 Engineer
@@ -51,6 +52,7 @@ Engineer
 
         new engineer(response1, response2, response3, response4)
         employees.push(new engineer)
+        confirmAddEmployee()
 
 Intern
 
@@ -77,5 +79,34 @@ Intern
 
         new intern(response1, response2, response3, response4)
         employees.push(new intern)
+        confirmAddEmployee()
+
+confirmAddEmployee
+
+    inquirer
+        type: confirm
+        name: addEmployee
+        message: do you want to add another employee
+
+    then if add employee is true
+        getEmployeeType()
+
+    else
+        renderHTML and write a new html file into the outputs folder 
+
+getEmployeeType
+
+    inquirer
+        type: list
+        name: employeeType
+        message: what type of employee do you want to add?
+        options: [engineer, intern]
+
+    then
+        if the response is engineer
+            create engineer
+        else if the response is intern
+            create intern
+
 
         
