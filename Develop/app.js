@@ -159,7 +159,7 @@ function getEmployeeType() {
                 } else {
                     // call create team
                     
-                    fs.writeFileSync("team.html", render(employees));
+                    fs.writeFileSync("./output/team.html", render(employees));
                 }
             });
     }
