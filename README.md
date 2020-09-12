@@ -78,10 +78,4 @@ Intern
         new intern(response1, response2, response3, response4)
         employees.push(new intern)
 
-
-
-
-    
-
-
-    
+        
