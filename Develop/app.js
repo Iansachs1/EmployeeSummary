@@ -16,34 +16,96 @@ const employees = [];
 inquirer
     .prompt([
         {
-        name: "name",
-        message: "What is the team manager's name?"
+            name: "name",
+            message: "What is the team manager's name?"
         },
 
         {
-        name: "id",
-        message: "What is the team manager's employee id?"
+            name: "id",
+            message: "What is the team manager's employee id?"
         },
 
         {
-        name: "email",
-        message: "What is the team manager's email?"
+            name: "email",
+            message: "What is the team manager's email?"
         },
 
         {
-        name: "officeNumber",
-        message: "What is the team manager's office number?"
-        },
+            name: "officeNumber",
+            message: "What is the team manager's office number?"
+        }
     ])
 
-    .then(function(response) {
+    .then(function (response) {
         const name = response.name;
         const id = response.id;
         const email = response.email;
         const officeNumber = response.officeNumber;
+
         const teamManager = new Manager(name, id, email, officeNumber);
+
         employees.push(teamManager);
+    })
+
+    .then(function () {
+        const collectEngineers = async (allEngineers = []) => {
+            const prompts = [
+                {
+                    name: "name",
+                    message: `what is the engineer's name?`
+                },
+
+                {
+                    name: "id",
+                    message: `what is the engineer's employee id?`
+                },
+
+                {
+                    name: "email",
+                    message: `what is the engineer's email?`
+                },
+
+                {
+                    name: "github",
+                    message: `what is the engineer's github username?`
+                },
+
+                {
+                    type: "confirm",
+                    name: "again",
+                    message: "would you like to add another engineer?"
+                }
+            ];
+
+            const { again, ...answers } = await inquirer.prompt(prompts);
+
+            const newEngineers = [...allEngineers, answers];
+            return again ? collectEngineers(newEngineers) : newEngineers;
+        };
+
+        const main = async () => {
+            const allEngineers = await collectEngineers();
+            allEngineers.forEach(element => {
+                var i = 0;
+                const name = allEngineers[i].name;
+                const id = allEngineers[i].id;
+                const email = allEngineers[i].email;
+                const github = allEngineers[i].github;
+
+                const newEngineer = new Engineer(name, id, email, github);
+
+                employees.push(newEngineer);
+
+                i++
+            });
+
+            console.log(employees);
+        };
+
+        main();
     });
+
+
 // After the user has input all employees desired, call the `render` function (required
 // above) and pass in an array containing all employee objects; the `render` function will
 // generate and return a block of HTML including templated divs for each employee!
